@@ -1,0 +1,52 @@
+class Solution {
+    //1,2,3
+    int count;
+    public int countArrangement(int n) {
+        int[] arr=new int[n+1];
+        for(int i=1;i<=n;i++){
+            arr[i]=i;
+        }
+        generateArrays(arr,1,n+1);
+        return count;
+        
+    }
+    
+    public void generateArrays(int[] arr,int l,int r){
+        if(l==r){
+            this.count++;
+            return;
+        }
+        else{
+            for(int i=l;i<r;i++){
+                
+                    this.swap(arr,i,l);
+                if(this.isSafe(arr,l,r)){
+                    generateArrays(arr,l+1,r);
+                   
+                }
+                 this.swap(arr,i,l);
+            }
+        }
+    }
+    
+    public void swap(int[] arr,int a,int b){
+        int temp=arr[a];
+        arr[a]=arr[b];
+        arr[b]=temp;
+    }
+    
+    public  boolean isSafe(int[] arr,int l,int r){
+        if(arr[l]%l!=0 && l%arr[l]!=0){
+            return false;
+        }
+        return true;
+    }
+    public boolean check(int[] arr){
+        for(int i=1;i<arr.length;i++){
+            if(arr[i]%i!=0 && i%arr[i]!=0){
+                return false;
+            }
+        }
+        return true;
+    }
+}
