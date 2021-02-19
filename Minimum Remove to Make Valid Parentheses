@@ -1,0 +1,55 @@
+import java.util.*; 
+
+
+class Solution {
+    public String minRemoveToMakeValid(String s) {
+        Stack<StackItem> stack=new Stack();
+        int j=0;
+        // while(j<s.length && stack.size()<1){
+        //     if(s.charAt(j)=='(' || s.charAt(j)==')'){
+        //          StackItem sObj=new StackItem(s,j);
+        //          stack.push(sObj);
+        //     }
+        // }
+        while(j<s.length()){
+            if(s.charAt(j)=='(' || s.charAt(j)==')'){
+                // "lee(t(c)o)de)"
+                    if(!stack.empty()){
+                        if(stack.peek().p=='(' && s.charAt(j)==')'){
+                            // System.out.println(stack.peek().p+"-----"+stack.peek().i);
+                            stack.pop();
+                        }
+                        else{
+                            StackItem sObj=new StackItem(s.charAt(j),j);
+                            stack.push(sObj);
+                        }
+                    }
+                    else{
+                            StackItem sObj=new StackItem(s.charAt(j),j);
+                            stack.push(sObj);
+                    }
+                
+               
+            }
+             j++;
+            
+            
+        }
+        StringBuilder sb=new StringBuilder(s);
+            while(!stack.empty()){
+                // System.out.println(stack.peek().p+"-----"+stack.peek().i);
+                sb.deleteCharAt(stack.pop().i);
+            }
+            return sb.toString();
+        
+    }
+}
+
+class StackItem{
+    char p;
+    int i;
+    StackItem(char p,int i){
+        this.p=p;
+        this.i=i;
+    }
+}
