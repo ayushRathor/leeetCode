@@ -1,0 +1,31 @@
+class Solution {
+    public String findLongestWord(String s, List<String> d) {
+        
+        String result="";
+        for(String str:d){
+            // System.out.println(isSubsequence(s,str));
+            if(isSubsequence(s,str)){
+                
+                if(str.length()>result.length() || (str.length()==result.length() && str.compareTo(result)<1))
+                result=str;
+            }
+        }
+        
+        return result;
+    }
+    
+    public static boolean isSubsequence(String s1,String s2){
+        if(s1.length()<s2.length()){
+            return false;
+        }
+        int i=0,j=0;
+        while(i<s1.length() && j<s2.length()){
+            if(s1.charAt(i)==s2.charAt(j)){
+                j++;
+            }
+            i++;
+        }
+        
+        return j==s2.length();
+    }
+}
