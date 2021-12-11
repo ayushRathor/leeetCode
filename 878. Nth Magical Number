@@ -1,0 +1,20 @@
+class Solution {
+    
+    public static int gcd(int a,int b){
+        if(a==0) return b;
+        return gcd(b%a,a);
+    }
+    public int nthMagicalNumber(int n, int a, int b) {
+        long l=Math.min(a,b);
+        long r=l*n;
+        long mod=(long)Math.pow(10,9)+7;
+        long lcm=(a*b)/gcd(a,b);
+        while(l<r){
+            long mid = l+(r-l)/2;
+            if((mid/a + mid/b -mid/lcm)<n) l=mid+1;
+            else r=mid;
+        }
+        
+        return (int)(l%mod);
+    }
+}
